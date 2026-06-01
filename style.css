@@ -1,100 +1,126 @@
+/* Import Font Plus Jakarta Sans */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
 /* --- Reset Dasar --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+/* --- Latar Belakang Gradasi Biru ke Ungu Bergerak --- */
 body {
-    background-color: #f3f4f6; /* Latar belakang abu-abu sangat terang */
+    background: linear-gradient(135deg, #1e3a8a, #7e22ce, #3b82f6);
+    background-size: 200% 200%;
+    animation: gradientMove 12s ease infinite;
     display: flex;
-    justify-content: center;
-    padding: 3rem 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 1.5rem;
     min-height: 100vh;
+    color: #ffffff; /* Teks dominan putih agar kontras */
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Judul Halaman --- */
+.header-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    letter-spacing: -0.5px;
 }
 
 /* --- Kontainer Utama --- */
 .faq-container {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem; /* Jarak antar gelembung */
+    gap: 1.25rem;
     width: 100%;
     max-width: 650px;
 }
 
-/* --- Desain Gelembung Utama --- */
+/* --- Desain Gelembung Glassmorphism (Kaca) --- */
 .faq-bubble {
-    background-color: #ffffff;
-    border-radius: 16px; /* Sudut membulat seperti gelembung */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.08); /* Efek tembus pandang */
+    backdrop-filter: blur(16px); /* Efek kaca buram */
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     overflow: hidden;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    border: 1px solid transparent;
+    transition: all 0.3s ease;
 }
 
-/* Saat gelembung diklik/dibuka, berikan efek bayangan dan garis tepi warna indigo */
+/* Saat gelembung diklik/dibuka, efek kacanya makin terang */
 .faq-bubble[open] {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(79, 70, 229, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
 
-/* --- Area Pertanyaan (Bisa di-klik) --- */
+/* --- Area Pertanyaan --- */
 .faq-question {
     padding: 1.25rem 1.5rem;
     font-weight: 600;
-    font-size: 1.05rem;
-    color: #1f2937;
+    font-size: 1.1rem;
+    color: #ffffff;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    list-style: none; /* Menghilangkan segitiga bawaan browser */
+    list-style: none;
     outline: none;
-    transition: background-color 0.2s ease;
+    transition: background 0.3s ease;
 }
 
-/* Menghilangkan ikon segitiga bawaan khusus untuk Chrome/Safari */
+/* Menghilangkan ikon panah bawaan browser */
 .faq-question::-webkit-details-marker {
     display: none;
 }
 
-/* Efek saat mouse berada di atas pertanyaan */
 .faq-question:hover {
-    background-color: #f9fafb;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 /* --- Area Jawaban --- */
 .faq-answer {
     padding: 0 1.5rem 1.5rem 1.5rem;
-    color: #4b5563;
+    color: rgba(255, 255, 255, 0.85);
     font-size: 0.95rem;
-    line-height: 1.7;
-    border-top: 1px solid #f3f4f6; /* Garis pembatas tipis antara P dan J */
+    line-height: 1.8;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
     margin-top: 0.5rem;
-    padding-top: 1rem;
-    animation: slideDown 0.3s ease-out forwards;
+    padding-top: 1.25rem;
+    animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* --- Desain Ikon Plus (+) --- */
 .icon {
-    font-size: 1.5rem;
-    color: #4f46e5; /* Warna indigo */
+    font-size: 1.8rem;
     font-weight: 400;
-    transition: transform 0.3s ease, color 0.3s ease;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    transition: transform 0.4s ease;
 }
 
-/* Saat gelembung terbuka, ikon (+) berputar menjadi (x) dan berubah warna */
+/* Saat terbuka, ikon (+) berputar 135 derajat menjadi (x) */
 .faq-bubble[open] .icon {
-    transform: rotate(45deg);
-    color: #ef4444; /* Berubah jadi merah muda/merah */
+    transform: rotate(135deg);
 }
 
-/* --- Animasi Muncul Halus pada Jawaban --- */
+/* --- Animasi Muncul Halus --- */
 @keyframes slideDown {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-15px);
     }
     to {
         opacity: 1;
