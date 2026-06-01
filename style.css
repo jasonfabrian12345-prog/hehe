@@ -19,13 +19,61 @@ body {
     align-items: center;
     padding: 4rem 1.5rem;
     min-height: 100vh;
-    color: #ffffff; /* Teks dominan putih agar kontras */
+    color: #ffffff;
+    overflow-x: hidden; /* Mencegah layar tergeser ke samping */
+    position: relative;
 }
 
 @keyframes gradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+/* --- ANIMASI HATI MELAYANG --- */
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Penting: Agar hati tidak menghalangi klik mouse */
+    z-index: 1; /* Berada di belakang gelembung */
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    bottom: -10vh; /* Mulai dari bawah layar yang tidak terlihat */
+    left: var(--left); /* Posisi horizontal acak dari HTML */
+    font-size: var(--size); /* Ukuran acak dari HTML */
+    color: #ff69b4; /* Warna Hot Pink */
+    text-shadow: 0 0 12px rgba(255, 105, 180, 0.6); /* Efek glowing pink */
+    animation: floatUp var(--duration) ease-in-out infinite;
+    animation-delay: var(--delay);
+    opacity: 0;
+}
+
+/* Animasi terbang ke atas sambil berayun */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.8) rotate(-15deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-50vh) translateX(20px) scale(1.2) rotate(15deg);
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-110vh) translateX(-20px) scale(0.8) rotate(-15deg);
+        opacity: 0;
+    }
 }
 
 /* --- Judul Halaman --- */
@@ -36,6 +84,8 @@ body {
     text-align: center;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     letter-spacing: -0.5px;
+    position: relative;
+    z-index: 10; /* Berada di depan hati */
 }
 
 /* --- Kontainer Utama --- */
@@ -45,12 +95,14 @@ body {
     gap: 1.25rem;
     width: 100%;
     max-width: 650px;
+    position: relative;
+    z-index: 10; /* Berada di depan hati */
 }
 
 /* --- Desain Gelembung Glassmorphism (Kaca) --- */
 .faq-bubble {
-    background: rgba(255, 255, 255, 0.08); /* Efek tembus pandang */
-    backdrop-filter: blur(16px); /* Efek kaca buram */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
@@ -59,7 +111,6 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Saat gelembung diklik/dibuka, efek kacanya makin terang */
 .faq-bubble[open] {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.4);
@@ -81,7 +132,6 @@ body {
     transition: background 0.3s ease;
 }
 
-/* Menghilangkan ikon panah bawaan browser */
 .faq-question::-webkit-details-marker {
     display: none;
 }
@@ -111,7 +161,6 @@ body {
     transition: transform 0.4s ease;
 }
 
-/* Saat terbuka, ikon (+) berputar 135 derajat menjadi (x) */
 .faq-bubble[open] .icon {
     transform: rotate(135deg);
 }
@@ -127,4 +176,3 @@ body {
         transform: translateY(0);
     }
 }
-
