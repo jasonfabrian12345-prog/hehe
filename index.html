@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA</title>
+    <title>For You</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
@@ -27,13 +27,56 @@
             align-items: center;
             padding: 4rem 1.5rem;
             min-height: 100vh;
-            color: #ffffff; /* Teks dominan putih agar kontras */
+            color: #ffffff;
+            overflow-x: hidden; /* Mencegah layar tergeser ke samping karena animasi */
+            position: relative;
         }
 
         @keyframes gradientMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        /* --- ANIMASI HATI MELAYANG --- */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Agar hati tidak menghalangi klik */
+            z-index: 1; /* Berada di belakang gelembung */
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -10vh; /* Mulai dari bawah layar */
+            left: var(--left);
+            font-size: var(--size);
+            color: #ff69b4; /* Warna pink */
+            text-shadow: 0 0 12px rgba(255, 105, 180, 0.6); /* Efek glowing */
+            animation: floatUp var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.8) rotate(-15deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            50% {
+                transform: translateY(-50vh) translateX(20px) scale(1.2) rotate(15deg);
+                opacity: 0.8;
+            }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(-110vh) translateX(-20px) scale(0.8) rotate(-15deg);
+                opacity: 0;
+            }
         }
 
         /* --- Judul Halaman --- */
@@ -44,6 +87,8 @@
             text-align: center;
             text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             letter-spacing: -0.5px;
+            position: relative;
+            z-index: 10; /* Berada di depan animasi hati */
         }
 
         /* --- Kontainer Utama --- */
@@ -53,6 +98,8 @@
             gap: 1.25rem;
             width: 100%;
             max-width: 650px;
+            position: relative;
+            z-index: 10; /* Berada di depan animasi hati */
         }
 
         /* --- Desain Gelembung Glassmorphism (Kaca) --- */
@@ -100,7 +147,7 @@
         /* --- Area Jawaban --- */
         .faq-answer {
             padding: 0 1.5rem 1.5rem 1.5rem;
-            color: rgba(255, 255, 255, 0.85); /* Putih sedikit transparan agar beda dengan judul */
+            color: rgba(255, 255, 255, 0.85); /* Putih sedikit transparan */
             font-size: 0.95rem;
             line-height: 1.8;
             border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -137,6 +184,16 @@
     </style>
 </head>
 <body>
+
+    <div class="floating-hearts">
+        <span class="heart" style="--left: 10%; --duration: 8s; --delay: 0s; --size: 1.2rem;">&#10084;</span>
+        <span class="heart" style="--left: 25%; --duration: 12s; --delay: 2s; --size: 0.8rem;">&#10084;</span>
+        <span class="heart" style="--left: 40%; --duration: 9s; --delay: 4s; --size: 1.5rem;">&#10084;</span>
+        <span class="heart" style="--left: 60%; --duration: 10s; --delay: 1s; --size: 1rem;">&#10084;</span>
+        <span class="heart" style="--left: 75%; --duration: 14s; --delay: 3s; --size: 1.3rem;">&#10084;</span>
+        <span class="heart" style="--left: 90%; --duration: 11s; --delay: 5s; --size: 0.9rem;">&#10084;</span>
+        <span class="heart" style="--left: 50%; --duration: 13s; --delay: 6s; --size: 1.1rem;">&#10084;</span>
+    </div>
 
     <h1 class="header-title">For You</h1>
 
