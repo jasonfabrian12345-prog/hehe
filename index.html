@@ -3,42 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desain Gelembung FAQ</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Desain Gelembung FAQ - Glassmorphism</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Reset Dasar --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* --- Latar Belakang Gradasi Biru ke Ungu Bergerak --- */
+        body {
+            background: linear-gradient(135deg, #1e3a8a, #7e22ce, #3b82f6);
+            background-size: 200% 200%;
+            animation: gradientMove 12s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 1.5rem;
+            min-height: 100vh;
+            color: #ffffff; /* Teks dominan putih agar kontras */
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Judul Halaman --- */
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: -0.5px;
+        }
+
+        /* --- Kontainer Utama --- */
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            width: 100%;
+            max-width: 650px;
+        }
+
+        /* --- Desain Gelembung Glassmorphism (Kaca) --- */
+        .faq-bubble {
+            background: rgba(255, 255, 255, 0.08); /* Efek tembus pandang */
+            backdrop-filter: blur(16px); /* Efek kaca buram */
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Saat gelembung diklik/dibuka, efek kacanya makin terang */
+        .faq-bubble[open] {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        /* --- Area Pertanyaan --- */
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            outline: none;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- Area Jawaban --- */
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: rgba(255, 255, 255, 0.85); /* Putih sedikit transparan agar beda dengan judul */
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            margin-top: 0.5rem;
+            padding-top: 1.25rem;
+            animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* --- Desain Ikon Plus (+) --- */
+        .icon {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Efek cahaya tipis (Aura glow) */
+            transition: transform 0.4s ease;
+        }
+
+        /* Saat terbuka, ikon (+) berputar 135 derajat menjadi (x) */
+        .faq-bubble[open] .icon {
+            transform: rotate(135deg);
+        }
+
+        /* --- Animasi Muncul Halus --- */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
+
+    <h1 class="header-title">Pertanyaan Seputar Layanan</h1>
+
     <div class="faq-container">
         
         <details class="faq-bubble" open>
             <summary class="faq-question">
-                1. Apakah saya bisa membuat banyak pertanyaan di sini?
+                1. Bagaimana konsep visual dari desain terbaru ini?
                 <span class="icon">+</span>
             </summary>
             <div class="faq-answer">
-                <p>Tentu saja! Anda bisa menggandakan struktur HTML ini sebanyak yang Anda butuhkan. Desain satu gelembung ini sangat cocok untuk halaman FAQ (Pertanyaan yang Sering Diajukan).</p>
+                <p>Desain ini mengadopsi gaya <strong>Glassmorphism</strong>. Alih-alih menggunakan warna solid, latar belakang gelembung dibuat agak transparan dengan efek blur, sehingga warna gradasi biru-ungu di belakangnya dapat menembus layaknya kaca buram.</p>
             </div>
         </details>
 
         <details class="faq-bubble">
             <summary class="faq-question">
-                2. Bagaimana cara kerja buka-tutup pada gelembung ini?
+                2. Apakah warna gradasinya bisa bergerak?
                 <span class="icon">+</span>
             </summary>
             <div class="faq-answer">
-                <p>Gelembung ini menggunakan tag HTML khusus yaitu <strong>&lt;details&gt;</strong> untuk pembungkusnya dan <strong>&lt;summary&gt;</strong> untuk judul pertanyaannya. Kombinasi ini memungkinkan gelembung merespons klik secara otomatis.</p>
+                <p>Benar. Jika Anda perhatikan dengan saksama, latar belakangnya menggunakan animasi CSS yang secara terus-menerus menggeser gradasi dari biru gelap ke ungu terang dengan sangat halus, menciptakan efek ruang dan kedalaman.</p>
             </div>
         </details>
 
         <details class="faq-bubble">
             <summary class="faq-question">
-                3. Apakah tampilan ini menyesuaikan layar HP?
+                3. Font apa yang digunakan pada tampilan ini?
                 <span class="icon">+</span>
             </summary>
             <div class="faq-answer">
-                <p>Ya, lebar gelembung ini diatur agar fleksibel (responsif). Di layar komputer ia akan memiliki lebar maksimal tertentu, namun di layar HP ia akan menyesuaikan penuh dari ujung ke ujung layar dengan rapi.</p>
+                <p>Tipografi pada antarmuka ini didukung oleh <strong>Plus Jakarta Sans</strong>, font yang dirancang untuk keterbacaan tinggi di berbagai layar modern sekaligus memberikan estetika tebal dan tegas.</p>
             </div>
         </details>
 
     </div>
+
 </body>
 </html>
